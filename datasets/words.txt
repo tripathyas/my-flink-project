@@ -1,0 +1,2 @@
+You can restrict access to your website or some parts of it by implementing a username/password authentication. Usernames and passwords are taken from a file created and populated by a password file creation tool, for example, apache2-utils.
+HTTP Basic authentication can also be combined with other access restriction methods, for example restricting access by IP address or geographical location.
