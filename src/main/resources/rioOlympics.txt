@@ -3,4 +3,5 @@ Rio 2016 medal table details
 #China: {Gold:26, Silver:18, Bronze:26, Total:70}
 #Canada: {Gold:4, Silver:3, Bronze:15, Total:22}
 #Germany: {Gold:17, Silver:10, Bronze:16, Total:43}
+#zerogold: {Gold:0, Silver:10, Bronze:16, Total:43}
 
