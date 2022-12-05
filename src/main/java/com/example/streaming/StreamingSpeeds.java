@@ -1,0 +1,65 @@
+package com.pluralsight.streaming;
+
+import org.apache.flink.api.common.serialization.TypeInformationSerializationSchema;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.util.Collector;
+import org.apache.flink.util.OutputTag;
+
+public class StreamingSpeeds {
+
+    public static void main(String[] args) throws Exception {
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        env.setParallelism(1);
+
+        DataStream<SpeedometerReading> readings = env.addSource(new SpeedometerSource());
+
+        final OutputTag<String> outputTag = new OutputTag<String>("special-fines") {};
+
+        SingleOutputStreamOperator<String> speedReadings =
+                readings.process(new SpeedMeasurementFunction(outputTag));
+
+        DataStream<String> sideOutputStream = speedReadings.getSideOutput(outputTag);
+
+        speedReadings.print();
+
+        sideOutputStream.writeToSocket("localhost", 8000,
+                                        new TypeInformationSerializationSchema<>(
+                                            sideOutputStream.getType(),
+                                            env.getConfig()));
+
+        env.execute("Speedometer readings");
+    }
+
+    public static class SpeedMeasurementFunction
+            extends ProcessFunction<SpeedometerReading, String> {
+
+        private final OutputTag<String> outputTag;
+
+        public SpeedMeasurementFunction(OutputTag<String> outputTag) {
+            this.outputTag = outputTag;
+        }
+
+        @Override
+        public void processElement(SpeedometerReading value, Context ctx, Collector<String> out)
+                throws Exception {
+
+            if (value.speed > 75) {
+                String outputString = value.car + ", " + value.speed + ", " + value.timestamp;
+
+                out.collect(outputString);
+
+                if (value.car.equals("Cadillac") || value.car.equals("BMW")) {
+                    ctx.output(outputTag, outputString + "\n");
+                }
+            }
+
+        }
+    }
+
+}
