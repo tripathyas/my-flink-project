@@ -9,7 +9,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
-public class StreamingStockPrices {
+public class StreamingStockPricesv3 {
 
     public static void main(String[] args) throws Exception {
 
