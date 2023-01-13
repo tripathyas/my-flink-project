@@ -11,7 +11,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 import static org.apache.flink.table.api.Expressions.$;
 
-public class StreamingCreditScores {
+public class StreamingCreditScoresv3 {
 
     public static void main(String[] args) {
 

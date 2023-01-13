@@ -1,4 +1,4 @@
-package com.pluralsight.streaming;
+package com.example.streaming;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.java.tuple.Tuple2;

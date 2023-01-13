@@ -1,4 +1,4 @@
-package com.pluralsight.streaming;
+package com.example.streaming;
 
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 

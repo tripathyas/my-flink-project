@@ -1,4 +1,4 @@
-package com.pluralsight.streaming;
+package com.example.streaming;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

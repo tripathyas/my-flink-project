@@ -1,4 +1,4 @@
-package com.pluralsight.streaming;
+package com.example.streaming;
 
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -12,7 +12,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import static org.apache.flink.table.api.Expressions.$;
 import static org.apache.flink.table.api.Expressions.concat;
 
-public class StreamingCreditScores {
+public class StreamingCreditScoresv4 {
 
     public static void main(String[] args) {
 
@@ -25,7 +25,7 @@ public class StreamingCreditScores {
         DataStream<CreditRecord> creditStream = recordsStream
             .filter((FilterFunction<String>) line -> !line.contains(
                 "ID,LoanStatus,LoanAmount,Term,CreditScore,AnnualIncome,Home,CreditBalance"))
-            .map(new MapFunction<String, CreditRecord>() {
+            .map(new MapFunction<String, com.example.streaming.CreditRecord>() {
 
                 @Override
                 public CreditRecord map(String s) throws Exception {
